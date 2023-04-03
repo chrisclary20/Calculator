@@ -1,0 +1,85 @@
+*, *::before, *::after {
+    align-items: center;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+} 
+
+body {
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(105,121,9,1) 0%, rgba(9,124,9,1) 30%, rgba(0,142,255,1) 100%);
+}
+
+.calc-container {
+   justify-content: center;
+   align-items: center;
+   width: 450px;
+   height: 650px;
+   background-color: aliceblue;
+   display: grid;
+   justify-content: center;
+   align-items: center;
+   border-style: outset;
+   border-width: 10px;
+   padding: 1px;
+   min-height: 80vh;
+   box-shadow: 100px 10px 20px rgba(0, 0, 0, 0.2);
+   grid-template-columns: repeat(4, 1fr);
+   grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+   grid-template-areas:
+        "total total total total"
+        "ac ac del div"
+        "one two three mult"
+        "four five six plus"
+        "seven eight nine minus"
+        "zero back dot equal";
+}
+
+.calc-container > button {
+    cursor: pointer;
+    margin: 10px;
+    font-size: 24px;
+    border: 1px, solid red;
+    outline: none;
+    background-color: aliceblue;
+    border-radius: 20%;
+}
+
+.calc-container > button:hover > .ac {
+    background-color: rgb(255, 0, 0);
+}
+
+.calc-container > button:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+
+.total {
+    color: aliceblue;
+    background-color: black;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* Add grid-area property to position the buttons */
+.calc-container > .ac { grid-area: ac; border-radius: 0%; background-color: black; color: white; }
+.calc-container > .del { grid-area: del; }
+.calc-container > .div { grid-area: div; }
+.calc-container > .mult { grid-area: mult; }
+.calc-container > .plus { grid-area: plus; }
+.calc-container > .minus { grid-area: minus; }
+.calc-container > .equal { grid-area: equal; }
+.calc-container > .back { grid-area: back; }
+.calc-container > .dot { grid-area: dot; }
+.calc-container > .zero { grid-area: zero; }
