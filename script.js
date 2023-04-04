@@ -8,6 +8,31 @@ const totalArea = document.querySelector('.total');
 // Get the container that holds all the calculator buttons
 const btnClick = document.querySelector('.calc-container');
 
+const backBtn = document.querySelector('.back');
+
+function handlesEquals(){
+    switch (selectedOperation) {
+        case '+':
+            currentNumber = parseFloat(previousNumber) + parseFloat(currentNumber);
+            break;
+        case '-':
+            currentNumber = parseFloat(previousNumber) - parseFloat(currentNumber);
+            break;
+        case '*':
+            currentNumber = parseFloat(previousNumber) * parseFloat(currentNumber);
+            break;        
+        case '÷':
+            currentNumber = parseFloat(previousNumber) / parseFloat(currentNumber);
+            break; 
+    }
+
+    previousNumber = '';
+    selectedOperation = null;
+
+    totalArea.textContent = currentNumber;
+};
+
+
 // Add an event listener to the container, listening for clicks on any of the buttons
 btnClick.addEventListener('click', function(event) {
 
@@ -28,9 +53,29 @@ btnClick.addEventListener('click', function(event) {
       totalArea.textContent = currentNumber;
     }
     // Check if the clicked button is an operator
-    else if (buttonValue === '+' || buttonValue === '-' || buttonValue === '*' || buttonValue === '/') {
-      // Handle operator button click
-      // Not implemented in this calculator
+    else if (buttonValue === '+' || buttonValue === '-' || buttonValue === '*' || buttonValue === '÷') {
+      switch (buttonValue) {
+        case '+':
+            selectedOperation = '+';
+            previousNumber = currentNumber;
+            currentNumber = '';
+            break;
+        case '-':
+            selectedOperation = '-';
+            previousNumber = currentNumber;
+            currentNumber = '';
+            break;
+        case '*':
+            selectedOperation = '*';
+            previousNumber = currentNumber;
+            currentNumber = '';
+            break;        
+        case '÷':
+            selectedOperation = '÷';
+            previousNumber = currentNumber;
+            currentNumber = '';
+            break;                           
+      }
     }
     // Check if the clicked button is a special button (AC, DEL, etc.)
     else {
@@ -68,23 +113,27 @@ btnClick.addEventListener('click', function(event) {
           totalArea.textContent = currentNumber;
           break;
         case '=':
-          // Handle equal button click
-          // If either the current or previous number is '69', display 'nice.'
-          if (previousNumber === '69' || currentNumber === '69') {
-            totalArea.textContent = 'nice.';
-            currentNumber = '';
-            previousNumber = '';
-            selectedOperation = null;
-          } 
-          // If either the current or previous number is '420', display a message about it being that time
-          else if (previousNumber === '420' || currentNumber === '420') {
-            totalArea.textContent = "🌿🌿🌿 It's that time friends. 🌿🌿🌿";
-            currentNumber = '';
-            previousNumber = '';
-            selectedOperation = null;
-          }
+          handlesEquals();
           break; 
         // Add more cases for other special buttons, if needed
+        case '.':
+            currentNumber += '.';
+            totalArea.textContent = currentNumber;
+            break;
+        case '←':
+            const input = document.querySelector('.total-input');
+            let cursorPosition = input.selectionStart;
+            if (cursorPosition === 0) {
+              return;
+            } else {
+              cursorPosition--;
+            }
+            input.setSelectionRange(cursorPosition, cursorPosition);
+
+            input.addEventListener('click', function(){
+                cursorPosition = input.selectionStart;
+            })
+            break;
       }
     }
   }
