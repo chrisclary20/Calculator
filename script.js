@@ -32,7 +32,6 @@ function handlesEquals(){
     totalArea.textContent = currentNumber;
 };
 
-// Display 0 whenever the app is launched
 totalArea.textContent = currentNumber;
 
 // Add an event listener to the container, listening for clicks on any of the buttons
@@ -119,9 +118,17 @@ btnClick.addEventListener('click', function(event) {
           break; 
         // Add more cases for other special buttons, if needed
         case '.':
-            currentNumber += '.';
-            totalArea.textContent = currentNumber;
-            break;
+          if (currentNumber.includes('.')) {
+              return;
+            } else if (currentNumber === '0'){
+              currentNumber = '0.';
+             } else if (currentNumber === '0.') {
+              return;
+            } else {
+              currentNumber += '.';
+           }
+             totalArea.textContent = currentNumber;
+             break;
         case '←':
             const input = document.querySelector('.total-input');
             let cursorPosition = input.selectionStart;
