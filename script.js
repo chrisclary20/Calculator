@@ -32,6 +32,8 @@ function handlesEquals(){
     totalArea.textContent = currentNumber;
 };
 
+// Display 0 whenever the app is launched
+totalArea.textContent = currentNumber;
 
 // Add an event listener to the container, listening for clicks on any of the buttons
 btnClick.addEventListener('click', function(event) {
