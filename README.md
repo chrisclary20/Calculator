@@ -1,4 +1,4 @@
-# Calc-u-matic
+# Calcul8r
 
 Basic calculator with HTML, CSS, and vanilla Javascript 
 
